@@ -1,29 +1,25 @@
-import React from 'react';
-
 export default function Header({ cartCount }) {
   return (
-    <header className="sticky top-0 z-50 bg-[#2C1D11] text-[#FDFBF7] shadow-md px-4 py-3 sm:px-8">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-        <a href="#" className="text-xl font-serif font-bold tracking-wider text-[#FDFBF7]">
-          BOOK<span className="text-[#C05A3E]">LOVERS</span>
+    <header className="site-header">
+      <div className="nav-container">
+        <a href="#" className="brand-logo" aria-label="Booklovers home">
+          BOOK<span>lovers</span>
         </a>
 
-        <div className="flex-1 max-w-md hidden md:block">
-          <input 
-            type="text" 
-            placeholder="Search title, author..." 
-            className="w-full px-4 py-1.5 rounded-full bg-[#3D2B1F] text-sm text-[#FDFBF7] border border-[#6A584C] focus:outline-none focus:border-[#C05A3E]"
-          />
-        </div>
-
-        <nav className="flex items-center gap-4 sm:gap-6 text-sm font-medium">
-          <a href="#books" className="hover:text-[#C05A3E] transition-colors">Catalog</a>
-          <a href="#events" className="hover:text-[#C05A3E] transition-colors">Events</a>
-          <a href="#footer" className="hover:text-[#C05A3E] transition-colors">About</a>
-          <div className="relative bg-[#C05A3E] px-3 py-1 rounded-full text-xs font-bold">
-            Cart ({cartCount})
-          </div>
+        <nav aria-label="Main navigation">
+          <ul className="nav-links">
+            <li><a href="#fiction">Fiction</a></li>
+            <li><a href="#nonfiction">Non-Fiction</a></li>
+            <li><a href="#staff-picks">Staff Picks</a></li>
+            <li><a href="#events">Events</a></li>
+          </ul>
         </nav>
+
+        <div className="cart-badge-btn" id="cart" role="status" aria-live="polite">
+          <span aria-hidden="true">🛒</span>
+          <span>Cart</span>
+          <span className="cart-count">{cartCount}</span>
+        </div>
       </div>
     </header>
   );
