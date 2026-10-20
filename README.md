@@ -57,6 +57,20 @@ JWT-backed sessions. Visit `/auth/signup` to create an account or
 `/auth/signin` to log in. The storefront header switches between **Sign in**
 and **Sign out** based on the active session.
 
+## Vercel deployment
+
+1. Create a Vercel project for this repository and add `DATABASE_URL`,
+   `DIRECT_URL`, and `AUTH_SECRET` to its Production environment variables.
+   Use Neon’s pooled URL for `DATABASE_URL` and direct URL for `DIRECT_URL`.
+2. With those URLs in `.env.local`, run `npm run db:migrate` and
+   `npm run db:seed` once to initialize the database.
+3. Deploy the Next.js project from Vercel. The build generates Prisma Client;
+   runtime routes use `DATABASE_URL`.
+
+The production project must have these environment variables configured before
+the site is used. `.env.local` is ignored by Git and should never be uploaded
+or committed.
+
 ## Product API
 
 `GET /api/products` returns the seeded catalog as JSON:
