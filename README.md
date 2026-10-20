@@ -81,6 +81,7 @@ and **Sign out** based on the active session.
 ## Storefront features
 
 - Responsive bookstore navigation and hero section
-- Book catalog with category filtering and quantity controls
+- PostgreSQL-backed book catalog loaded from the product API
+- Category filtering and quantity controls
 - Staff recommendations, store highlights, and upcoming events
 - Newsletter signup and cart quantity display
