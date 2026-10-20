@@ -12,6 +12,7 @@ dist
 dist-ssr
 .next
 out
+/src/generated/prisma
 *.local
 .env*
 !.env.example
