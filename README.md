@@ -31,8 +31,9 @@ npm run dev
 
 1. Create a PostgreSQL database (for example, a free Neon project).
 2. Copy `.env.example` to `.env.local` and add your credentials. Set
-   `DATABASE_URL` to the pooled connection URL for the app and `DIRECT_URL` to
-   the direct connection URL for Prisma migrations.
+   `DATABASE_URL` to the pooled connection URL for the app and
+   `DATABASE_URL_UNPOOLED` to the direct connection URL for Prisma migrations.
+   Prisma also accepts `DIRECT_URL` if your provider uses that name.
 3. Generate the client, apply the schema, and seed products:
 
    ```sh
@@ -60,8 +61,9 @@ and **Sign out** based on the active session.
 ## Vercel deployment
 
 1. Create a Vercel project for this repository and add `DATABASE_URL`,
-   `DIRECT_URL`, and `AUTH_SECRET` to its Production environment variables.
-   Use Neon’s pooled URL for `DATABASE_URL` and direct URL for `DIRECT_URL`.
+   `DATABASE_URL_UNPOOLED`, and `AUTH_SECRET` to its Production environment
+   variables. Use Neon’s pooled URL for `DATABASE_URL` and direct URL for
+   `DATABASE_URL_UNPOOLED`.
 2. With those URLs in `.env.local`, run `npm run db:migrate` and
    `npm run db:seed` once to initialize the database.
 3. Deploy the Next.js project from Vercel. The build generates Prisma Client;
