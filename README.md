@@ -44,6 +44,27 @@ npm run dev
 Environment files are ignored by Git; never commit database credentials or
 authentication secrets.
 
+## Product API
+
+`GET /api/products` returns the seeded catalog as JSON:
+
+```json
+{
+  "products": [
+    {
+      "id": "generated-id",
+      "slug": "the-midnight-library",
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "category": "Fiction",
+      "priceInCents": 1899,
+      "badge": "Literary",
+      "coverClass": "cover-espresso"
+    }
+  ]
+}
+```
+
 ## Storefront features
 
 - Responsive bookstore navigation and hero section
