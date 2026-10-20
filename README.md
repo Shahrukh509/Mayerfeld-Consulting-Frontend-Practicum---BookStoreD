@@ -60,6 +60,8 @@ and **Sign out** based on the active session.
 
 ## Vercel deployment
 
+Production storefront: <https://bookstore-one-iota.vercel.app>
+
 1. Create a Vercel project for this repository and add `DATABASE_URL`,
    `DATABASE_URL_UNPOOLED`, and `AUTH_SECRET` to its Production environment
    variables. Use Neon’s pooled URL for `DATABASE_URL` and direct URL for
