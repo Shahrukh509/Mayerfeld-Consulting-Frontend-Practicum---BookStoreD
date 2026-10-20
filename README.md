@@ -1,6 +1,6 @@
 # Mayerfeld Bookstore
 
-A responsive bookstore storefront built with **React** and **Tailwind CSS**, using Vite for development and production builds.
+A responsive bookstore storefront built with **Next.js** and **React**.
 
 ## Getting started
 
@@ -18,9 +18,9 @@ npm run dev
 
 ## Available scripts
 
-- `npm run dev` starts the Vite development server.
+- `npm run dev` starts the Next.js development server.
 - `npm run build` creates a production build.
-- `npm run preview` serves the production build locally.
+- `npm start` serves the production build locally.
 - `npm run lint` runs ESLint.
 
 ## Storefront features
