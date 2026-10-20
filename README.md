@@ -41,8 +41,21 @@ npm run dev
    npm run db:seed
    ```
 
+4. Set `AUTH_SECRET` to a unique random value. For example:
+
+   ```sh
+   node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
+   ```
+
 Environment files are ignored by Git; never commit database credentials or
 authentication secrets.
+
+## Authentication
+
+Auth.js provides email/password signup and login, bcrypt password hashing, and
+JWT-backed sessions. Visit `/auth/signup` to create an account or
+`/auth/signin` to log in. The storefront header switches between **Sign in**
+and **Sign out** based on the active session.
 
 ## Product API
 
