@@ -144,7 +144,7 @@ function BookCard({
 }) {
   return (
     <article className="book-card">
-      <div className="book-cover">
+      <div className="book-cover" data-cover={book.coverClass}>
         <span className="badge">{book.badge}</span>
         <div
           className={`book-cover-mock ${book.coverClass}`}

@@ -94,6 +94,16 @@
             gap: 1rem;
         }
 
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
         .brand-logo {
             font-family: var(--font-serif);
             font-size: 1.85rem;
@@ -168,7 +178,7 @@
          */
         .hero {
             background: linear-gradient(135deg, rgba(44, 29, 17, 0.92) 0%, rgba(61, 43, 31, 0.88) 100%), 
-                        url('images/bookshelf.avif') center/cover no-repeat;
+                        url('/images/bookshelf.avif') center/cover no-repeat;
             color: var(--text-light);
             padding: 5rem 1.5rem 6rem 1.5rem;
             text-align: center;
@@ -372,6 +382,11 @@
         .book-cover {
             height: 260px;
             background-color: var(--bg-sand);
+            background-image:
+                linear-gradient(rgba(245, 239, 230, 0.28), rgba(245, 239, 230, 0.28)),
+                url('/images/bookshelf.avif');
+            background-position: center;
+            background-size: cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -416,6 +431,12 @@
         .cover-olive { background: linear-gradient(135deg, #4A5D4E, #2D3A30); }
         .cover-amber { background: linear-gradient(135deg, #D97724, #A3500B); }
         .cover-plum { background: linear-gradient(135deg, #5C3D46, #3B242B); }
+
+        .book-cover[data-cover="cover-espresso"] { background-position: 20% center; }
+        .book-cover[data-cover="cover-rust"] { background-position: 40% center; }
+        .book-cover[data-cover="cover-olive"] { background-position: 60% center; }
+        .book-cover[data-cover="cover-amber"] { background-position: 80% center; }
+        .book-cover[data-cover="cover-plum"] { background-position: center; }
 
         .badge {
             position: absolute;
@@ -862,26 +883,83 @@
 
         @media (max-width: 580px) {
             .nav-container {
-                flex-wrap: wrap;
-                justify-content: center;
+                position: relative;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                padding: 0.75rem 1rem;
             }
 
-            .nav-container nav {
+            .nav-toggle {
+                display: flex;
+                width: 42px;
+                height: 42px;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                background: var(--bg-parchment);
+                color: var(--text-espresso);
+                cursor: pointer;
+            }
+
+            .nav-toggle svg {
+                width: 22px;
+                height: 22px;
+                fill: none;
+                stroke: currentColor;
+                stroke-linecap: round;
+                stroke-width: 2;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                display: none;
+                align-items: stretch;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 1.25rem 1.25rem;
+                border-bottom: 1px solid var(--border-color);
+                background: var(--bg-parchment);
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-menu.is-open {
+                display: flex;
+            }
+
+            .nav-menu nav,
+            .nav-links {
                 width: 100%;
             }
 
             .nav-links {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0.65rem 1.1rem;
+                align-items: stretch;
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav-links li + li {
+                border-top: 1px solid var(--border-color);
             }
 
             .nav-links a {
+                display: block;
+                padding: 0.7rem 0.25rem;
+                font-size: 0.95rem;
                 white-space: nowrap;
             }
 
-            .cart-badge-btn {
-                order: 3;
+            .nav-actions {
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .auth-name {
+                display: none;
             }
         }
   

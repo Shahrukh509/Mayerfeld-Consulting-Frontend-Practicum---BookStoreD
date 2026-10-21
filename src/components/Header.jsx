@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function Header({ cartCount }) {
   const { data: session, status } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="site-header">
@@ -11,40 +13,66 @@ export default function Header({ cartCount }) {
           BOOK<span>lovers</span>
         </Link>
 
-        <nav aria-label="Main navigation">
-          <ul className="nav-links">
-            <li><a href="#fiction">Fiction</a></li>
-            <li><a href="#nonfiction">Non-Fiction</a></li>
-            <li><a href="#staff-picks">Staff Picks</a></li>
-            <li><a href="#events">Events</a></li>
-          </ul>
-        </nav>
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            {isMenuOpen ? (
+              <path d="m6 6 12 12M18 6 6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
 
-        <div className="nav-actions">
-          {status === 'loading' ? (
-            <span className="auth-nav-placeholder" aria-hidden="true" />
-          ) : session?.user ? (
-            <>
-              <span className="auth-name">
-                Hi, {session.user.name || session.user.email}
-              </span>
-              <button
-                type="button"
-                className="auth-nav-button"
-                onClick={() => signOut({ callbackUrl: '/' })}
+        <div
+          className={`nav-menu${isMenuOpen ? ' is-open' : ''}`}
+          id="primary-navigation"
+        >
+          <nav aria-label="Main navigation">
+            <ul className="nav-links">
+              <li><a href="#fiction" onClick={() => setIsMenuOpen(false)}>Fiction</a></li>
+              <li><a href="#nonfiction" onClick={() => setIsMenuOpen(false)}>Non-Fiction</a></li>
+              <li><a href="#staff-picks" onClick={() => setIsMenuOpen(false)}>Staff Picks</a></li>
+              <li><a href="#events" onClick={() => setIsMenuOpen(false)}>Events</a></li>
+            </ul>
+          </nav>
+
+          <div className="nav-actions">
+            {status === 'loading' ? (
+              <span className="auth-nav-placeholder" aria-hidden="true" />
+            ) : session?.user ? (
+              <>
+                <span className="auth-name">
+                  Hi, {session.user.name || session.user.email}
+                </span>
+                <button
+                  type="button"
+                  className="auth-nav-button"
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <Link
+                className="auth-nav-link"
+                href="/auth/signin"
+                onClick={() => setIsMenuOpen(false)}
               >
-                Sign out
-              </button>
-            </>
-          ) : (
-            <Link className="auth-nav-link" href="/auth/signin">
-              Sign in
-            </Link>
-          )}
-          <div className="cart-badge-btn" id="cart" role="status" aria-live="polite">
-            <span aria-hidden="true">🛒</span>
-            <span>Cart</span>
-            <span className="cart-count">{cartCount}</span>
+                Sign in
+              </Link>
+            )}
+            <div className="cart-badge-btn" id="cart" role="status" aria-live="polite">
+              <span aria-hidden="true">🛒</span>
+              <span>Cart</span>
+              <span className="cart-count">{cartCount}</span>
+            </div>
           </div>
         </div>
       </div>
