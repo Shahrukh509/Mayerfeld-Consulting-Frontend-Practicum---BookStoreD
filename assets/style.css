@@ -40,16 +40,9 @@
             --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* 
-         * REASON FOR GLOBAL BOX-SIZING RESET:
-         * Applying border-box globally includes padding and borders in the calculated width/height.
-         * This prevents element overflow issues and eliminates accidental horizontal scrolling 
-         * across mobile, tablet, and desktop viewports.
-         */
+        /* Keep custom components consistent with Tailwind's border-box sizing. */
         *, *::before, *::after {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         /* 

@@ -38,34 +38,62 @@ export default function SignInPage() {
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-card" aria-labelledby="signin-title">
-        <Link className="brand-logo auth-brand" href="/">
+    <main className="grid min-h-screen place-items-center px-4 py-8">
+      <section
+        className="w-full max-w-[440px] rounded-[10px] border border-[#E2D7C7] bg-white p-10 shadow-[0_6px_18px_rgba(44,29,17,0.09)] max-[580px]:px-5 max-[580px]:py-8"
+        aria-labelledby="signin-title"
+      >
+        <Link className="brand-logo mb-6 justify-center" href="/">
           BOOK<span>lovers</span>
         </Link>
-        <h1 id="signin-title">Welcome back</h1>
-        <p>Sign in to your Booklovers account.</p>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
+        <h1
+          id="signin-title"
+          className="mb-1 text-center font-[family-name:var(--font-serif)] text-[2rem] text-[#2C1D11]"
+        >
+          Welcome back
+        </h1>
+        <p className="text-center text-[#655344]">
+          Sign in to your Booklovers account.
+        </p>
+        <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
+          <label className="grid gap-[0.4rem] text-[0.9rem] font-semibold text-[#2C1D11]">
             Email address
-            <input name="email" type="email" autoComplete="email" required />
+            <input
+              className="w-full rounded-md border border-[#E2D7C7] px-[0.8rem] py-[0.7rem] text-[#2C1D11] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C05A3E]"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+            />
           </label>
-          <label>
+          <label className="grid gap-[0.4rem] text-[0.9rem] font-semibold text-[#2C1D11]">
             Password
             <input
+              className="w-full rounded-md border border-[#E2D7C7] px-[0.8rem] py-[0.7rem] text-[#2C1D11] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C05A3E]"
               name="password"
               type="password"
               autoComplete="current-password"
               required
             />
           </label>
-          {error && <p className="auth-error" role="alert">{error}</p>}
-          <button className="auth-submit" type="submit" disabled={submitting}>
+          {error && (
+            <p className="text-sm text-[#a32619]" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            className="cursor-pointer rounded-full bg-[#C05A3E] px-4 py-3 font-bold text-white hover:bg-[#A04328] disabled:cursor-wait disabled:opacity-70"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
-        <p className="auth-switch">
-          New to Booklovers? <Link href="/auth/signup">Create an account</Link>
+        <p className="mt-5 text-sm">
+          New to Booklovers?{' '}
+          <Link className="font-bold text-[#C05A3E]" href="/auth/signup">
+            Create an account
+          </Link>
         </p>
       </section>
     </main>

@@ -18,11 +18,11 @@ export default function App() {
   };
 
   return (
-    <div className="app-shell">
+    <div className="app-shell bg-[#FDFBF7] text-[#2C1D11]">
       <Header cartCount={cartCount} />
       <Hero />
       <StoreHighlights />
-      <main>
+      <main className="mx-auto w-full max-w-[1200px] px-6 pt-8 pb-20">
         <ProductGrid onAddToCart={handleAddToCart} />
         <StaffPicks />
         <EventsSection />

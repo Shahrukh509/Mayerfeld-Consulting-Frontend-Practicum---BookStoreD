@@ -55,25 +55,49 @@ export default function SignUpPage() {
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-card" aria-labelledby="signup-title">
-        <Link className="brand-logo auth-brand" href="/">
+    <main className="grid min-h-screen place-items-center px-4 py-8">
+      <section
+        className="w-full max-w-[440px] rounded-[10px] border border-[#E2D7C7] bg-white p-10 shadow-[0_6px_18px_rgba(44,29,17,0.09)] max-[580px]:px-5 max-[580px]:py-8"
+        aria-labelledby="signup-title"
+      >
+        <Link className="brand-logo mb-6 justify-center" href="/">
           BOOK<span>lovers</span>
         </Link>
-        <h1 id="signup-title">Join Booklovers</h1>
-        <p>Create an account to join our community of readers.</p>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
+        <h1
+          id="signup-title"
+          className="mb-1 text-center font-[family-name:var(--font-serif)] text-[2rem] text-[#2C1D11]"
+        >
+          Join Booklovers
+        </h1>
+        <p className="text-center text-[#655344]">
+          Create an account to join our community of readers.
+        </p>
+        <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
+          <label className="grid gap-[0.4rem] text-[0.9rem] font-semibold text-[#2C1D11]">
             Name
-            <input name="name" type="text" autoComplete="name" maxLength="80" required />
+            <input
+              className="w-full rounded-md border border-[#E2D7C7] px-[0.8rem] py-[0.7rem] text-[#2C1D11] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C05A3E]"
+              name="name"
+              type="text"
+              autoComplete="name"
+              maxLength="80"
+              required
+            />
           </label>
-          <label>
+          <label className="grid gap-[0.4rem] text-[0.9rem] font-semibold text-[#2C1D11]">
             Email address
-            <input name="email" type="email" autoComplete="email" required />
+            <input
+              className="w-full rounded-md border border-[#E2D7C7] px-[0.8rem] py-[0.7rem] text-[#2C1D11] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C05A3E]"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+            />
           </label>
-          <label>
+          <label className="grid gap-[0.4rem] text-[0.9rem] font-semibold text-[#2C1D11]">
             Password
             <input
+              className="w-full rounded-md border border-[#E2D7C7] px-[0.8rem] py-[0.7rem] text-[#2C1D11] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C05A3E]"
               name="password"
               type="password"
               autoComplete="new-password"
@@ -82,13 +106,24 @@ export default function SignUpPage() {
               required
             />
           </label>
-          {error && <p className="auth-error" role="alert">{error}</p>}
-          <button className="auth-submit" type="submit" disabled={submitting}>
+          {error && (
+            <p className="text-sm text-[#a32619]" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            className="cursor-pointer rounded-full bg-[#C05A3E] px-4 py-3 font-bold text-white hover:bg-[#A04328] disabled:cursor-wait disabled:opacity-70"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? 'Creating account…' : 'Create account'}
           </button>
         </form>
-        <p className="auth-switch">
-          Already have an account? <Link href="/auth/signin">Sign in</Link>
+        <p className="mt-5 text-sm">
+          Already have an account?{' '}
+          <Link className="font-bold text-[#C05A3E]" href="/auth/signin">
+            Sign in
+          </Link>
         </p>
       </section>
     </main>
