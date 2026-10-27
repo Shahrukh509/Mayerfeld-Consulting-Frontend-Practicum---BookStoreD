@@ -126,7 +126,6 @@ export async function POST(request) {
     );
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
       customer_email: session.user.email,
       client_reference_id: order.id,
       metadata: { orderId: order.id, userId },
