@@ -55,8 +55,8 @@ model VerificationToken {
 }
 
 model Product {
-  id           String   @id @default(cuid())
-  slug         String   @unique
+  id           String      @id @default(cuid())
+  slug         String      @unique
   title        String
   author       String
   category     String
@@ -64,8 +64,8 @@ model Product {
   badge        String
   coverClass   String
   orderItems   OrderItem[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 
   @@index([category])
 }
@@ -76,16 +76,23 @@ enum OrderStatus {
 }
 
 model Order {
-  id              String      @id @default(cuid())
-  userId          String
-  status          OrderStatus @default(PENDING)
-  currency        String      @default("usd")
-  totalInCents    Int
-  stripeSessionId String?     @unique
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items           OrderItem[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id                   String      @id @default(cuid())
+  userId               String
+  status               OrderStatus @default(PENDING)
+  currency             String      @default("usd")
+  totalInCents         Int
+  stripeSessionId      String?     @unique
+  shippingName         String?
+  shippingAddressLine1 String?
+  shippingAddressLine2 String?
+  shippingCity         String?
+  shippingState        String?
+  shippingPostalCode   String?
+  shippingCountry      String?
+  user                 User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items                OrderItem[]
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
 
   @@index([userId, createdAt])
   @@map("orders")

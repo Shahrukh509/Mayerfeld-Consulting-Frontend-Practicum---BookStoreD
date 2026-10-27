@@ -111,6 +111,26 @@ export default function CheckoutSuccessContent() {
               Order total: $
               {(state.order.totalInCents / 100).toFixed(2)}
             </p>
+            {state.order.shippingAddressLine1 && (
+              <div>
+                <h2 className="font-semibold">Shipping to</h2>
+                <p>{state.order.shippingName}</p>
+                <p>{state.order.shippingAddressLine1}</p>
+                {state.order.shippingAddressLine2 && (
+                  <p>{state.order.shippingAddressLine2}</p>
+                )}
+                <p>
+                  {[
+                    state.order.shippingCity,
+                    state.order.shippingState,
+                    state.order.shippingPostalCode,
+                  ]
+                    .filter(Boolean)
+                    .join(', ')}
+                </p>
+                <p>{state.order.shippingCountry}</p>
+              </div>
+            )}
             <ul className="list-inside list-disc">
               {state.order.items.map((item, index) => (
                 <li key={`${item.productTitle}-${index}`}>

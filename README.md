@@ -64,9 +64,10 @@ Checkout requires a signed-in user. Add multiple books to the persistent
 browser cart, adjust quantities, then choose **Checkout with Stripe**. The
 server reloads each product and price from PostgreSQL, saves a pending order
 with all item snapshots, and creates one Stripe-hosted Checkout Session with
-all cart lines. A verified Stripe webhook is the only code that changes an
-order to `PAID`; the success page checks the saved order status after Stripe
-redirects back and clears the cart after a successful cart checkout.
+all cart lines. Checkout collects a required recipient name and US shipping
+address. A verified Stripe webhook is the only code that changes an order to
+`PAID` and saves the collected shipping details; the owner-only order endpoint
+and success page then display the address after payment confirmation.
 
 1. Create or use a Stripe account and switch its dashboard to **Test mode**.
    The secret key previously pasted into chat should be revoked and replaced

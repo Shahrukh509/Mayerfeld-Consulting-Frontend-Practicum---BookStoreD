@@ -34,6 +34,13 @@ export async function GET(request, { params }) {
         currency: true,
         totalInCents: true,
         createdAt: true,
+        shippingName: true,
+        shippingAddressLine1: true,
+        shippingAddressLine2: true,
+        shippingCity: true,
+        shippingState: true,
+        shippingPostalCode: true,
+        shippingCountry: true,
         items: {
           select: {
             productTitle: true,

@@ -66,6 +66,10 @@ export async function POST(request) {
     );
   }
 
+  const shippingDetails =
+    checkoutSession.collected_information?.shipping_details;
+  const shippingAddress = shippingDetails?.address;
+
   try {
     const updated = await prisma.order.updateMany({
       where: {
@@ -73,7 +77,23 @@ export async function POST(request) {
         stripeSessionId: checkoutSession.id,
         status: 'PENDING',
       },
-      data: { status: 'PAID' },
+      data: {
+        status: 'PAID',
+        ...(shippingDetails && shippingAddress
+          ? {
+              shippingName:
+                shippingDetails.name ||
+                checkoutSession.collected_information?.individual_name ||
+                null,
+              shippingAddressLine1: shippingAddress.line1,
+              shippingAddressLine2: shippingAddress.line2,
+              shippingCity: shippingAddress.city,
+              shippingState: shippingAddress.state,
+              shippingPostalCode: shippingAddress.postal_code,
+              shippingCountry: shippingAddress.country,
+            }
+          : {}),
+      },
     });
 
     if (updated.count === 0) {

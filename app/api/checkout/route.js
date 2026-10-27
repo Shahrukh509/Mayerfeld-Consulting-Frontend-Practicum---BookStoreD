@@ -127,6 +127,12 @@ export async function POST(request) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: 'payment',
       customer_email: session.user.email,
+      name_collection: {
+        individual: { enabled: true, optional: false },
+      },
+      shipping_address_collection: {
+        allowed_countries: ['US'],
+      },
       client_reference_id: order.id,
       metadata: { orderId: order.id, userId },
       line_items: orderItems.map(({ product, quantity }) => ({
