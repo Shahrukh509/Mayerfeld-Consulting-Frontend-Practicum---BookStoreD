@@ -115,7 +115,7 @@ export default function App() {
       />
       {isCartOpen && (
         <div
-          className="fixed inset-0 z-[60] bg-black/40"
+          className="fixed inset-0 z-[1100] bg-black/40"
           onClick={() => setIsCartOpen(false)}
         >
           <section
