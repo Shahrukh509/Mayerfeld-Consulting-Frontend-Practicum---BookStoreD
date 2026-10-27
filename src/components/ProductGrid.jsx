@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import QuantityStepper from './QuantityStepper';
 
-export default function ProductGrid({ onAddToCart }) {
+export default function ProductGrid({
+  onAddToCart,
+  onBuyNow,
+  checkoutPending,
+}) {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [status, setStatus] = useState('loading');
@@ -123,8 +127,12 @@ export default function ProductGrid({ onAddToCart }) {
                   onIncrement={() => handleIncrement(book.id)}
                   onDecrement={() => handleDecrement(book.id)}
                   onAddToCart={() =>
-                    onAddToCart(quantities[book.id] ?? 1)
+                    onAddToCart(book, quantities[book.id] ?? 1)
                   }
+                  onCheckout={() =>
+                    onBuyNow(book, quantities[book.id] ?? 1)
+                  }
+                  checkoutPending={checkoutPending}
                 />
               ),
             )}
@@ -141,6 +149,8 @@ function BookCard({
   onIncrement,
   onDecrement,
   onAddToCart,
+  onCheckout,
+  checkoutPending,
 }) {
   return (
     <article className="book-card">
@@ -174,6 +184,14 @@ function BookCard({
               onClick={onAddToCart}
             >
               Add to Cart
+            </button>
+            <button
+              type="button"
+              className="checkout-button"
+              onClick={onCheckout}
+              disabled={checkoutPending}
+            >
+              {checkoutPending ? 'Starting…' : 'Buy now'}
             </button>
           </div>
         </div>

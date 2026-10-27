@@ -510,6 +510,36 @@
             border-color: var(--accent-rust);
         }
 
+        .checkout-button {
+            background-color: var(--accent-rust);
+            color: white;
+            border: 1px solid var(--accent-rust);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .checkout-button:hover {
+            background-color: var(--text-espresso);
+            border-color: var(--text-espresso);
+        }
+
+        .checkout-button:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        .checkout-error {
+            flex-basis: 100%;
+            color: #a32619;
+            font-size: 0.8rem;
+            text-align: right;
+        }
+
         /* 
          * REASON FOR STAFF PICKS GRID & CARD FLEXBOX:
          * Grid sets multi-column layout for reviews; Flexbox aligns thumbnail on left and review on right.
@@ -787,6 +817,8 @@
 
         .book-actions {
             gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .quantity-stepper {
@@ -844,6 +876,7 @@
 
         .quantity-stepper button:focus-visible,
         .add-cart-link:focus-visible,
+        .checkout-button:focus-visible,
         .newsletter-btn:focus-visible,
         .nav-links a:focus-visible,
         .cart-badge-btn:focus-visible {

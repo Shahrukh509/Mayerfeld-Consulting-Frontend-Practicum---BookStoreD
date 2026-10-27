@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-export default function Header({ cartCount }) {
+export default function Header({ cartCount, onOpenCart }) {
   const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -68,11 +68,17 @@ export default function Header({ cartCount }) {
                 Sign in
               </Link>
             )}
-            <div className="cart-badge-btn" id="cart" role="status" aria-live="polite">
+            <button
+              type="button"
+              className="cart-badge-btn border-0 font-[inherit] cursor-pointer"
+              id="cart"
+              aria-label={`Open cart, ${cartCount} items`}
+              onClick={onOpenCart}
+            >
               <span aria-hidden="true">🛒</span>
               <span>Cart</span>
               <span className="cart-count">{cartCount}</span>
-            </div>
+            </button>
           </div>
         </div>
       </div>

@@ -58,6 +58,46 @@ JWT-backed sessions. Visit `/auth/signup` to create an account or
 `/auth/signin` to log in. The storefront header switches between **Sign in**
 and **Sign out** based on the active session.
 
+## Stripe checkout
+
+Checkout requires a signed-in user. Add multiple books to the persistent
+browser cart, adjust quantities, then choose **Checkout with Stripe**. The
+server reloads each product and price from PostgreSQL, saves a pending order
+with all item snapshots, and creates one Stripe-hosted Checkout Session with
+all cart lines. A verified Stripe webhook is the only code that changes an
+order to `PAID`; the success page checks the saved order status after Stripe
+redirects back and clears the cart after a successful cart checkout.
+
+1. Create or use a Stripe account and switch its dashboard to **Test mode**.
+   The secret key previously pasted into chat should be revoked and replaced
+   before use. Add the rotated test secret to `.env.local` as
+   `STRIPE_SECRET_KEY`; do not commit it.
+2. Set `STRIPE_WEBHOOK_SECRET` in `.env.local` using the signing secret from
+   the Stripe CLI listener below. Apply database changes with
+   `npm run db:migrate`.
+3. In one terminal run the app with `npm run dev`. In another terminal, with
+   the Stripe CLI installed and authenticated, run:
+
+   ```sh
+   stripe listen --forward-to localhost:3000/api/stripe/webhook
+   ```
+
+   Copy the CLI's `whsec_...` signing secret into `STRIPE_WEBHOOK_SECRET` and
+   restart the app.
+4. Sign in, add one or more books to the cart, and select **Checkout with
+   Stripe** (or use **Buy now** for an individual book). In Stripe test
+   checkout use `4242 4242 4242 4242`, any future expiration date, and any CVC.
+   The order success page waits for webhook confirmation.
+5. For production, configure the production `STRIPE_SECRET_KEY` and
+   `STRIPE_WEBHOOK_SECRET` in the deployment environment, and add a Stripe
+   webhook endpoint at `https://<your-domain>/api/stripe/webhook` subscribed to
+   `checkout.session.completed` and
+   `checkout.session.async_payment_succeeded`. Set `AUTH_URL` to the canonical
+   deployed site URL.
+
+The `.env.local` file is git-ignored; keep Stripe credentials and webhook
+secrets out of source control.
+
 ## Vercel deployment
 
 Production storefront: <https://bookstore-one-iota.vercel.app>
